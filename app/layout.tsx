@@ -3,11 +3,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+
+
 import GooeyNav from '../components/GooeyNav'
-import PillNav from '../components/PillNav'
-
-import logo from './favicon.ico';
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,12 +38,12 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center`}
       >
         {/* Centered fixed nav */}
-        <div className="top-0 w-full flex justify-center mt-10">
+        <div className="top-0 w-full flex justify-center mt-5">
           <GooeyNav items={items} />
         </div>
 
         {/* Add top padding to push content below the nav */}
-        <main className="w-full pt-20" style={{ minHeight: "100vh" }}>
+        <main className="w-full pt-20" >
           {children}
         </main>
       </body>

@@ -2,6 +2,8 @@
 
 import React, { useRef, useEffect, useState } from "react";
 
+import { usePathname } from "next/navigation";
+
 interface GooeyNavItem {
   label: string;
   href: string;
@@ -28,6 +30,19 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
   colors = [1, 2, 3, 1, 2, 3, 1, 4],
   initialActiveIndex = 0,
 }) => {
+
+  
+
+  //Active section of the navbar indication. INDICATES WHICH SECTION OF THE NAVBAR IS ACTIVE OR IS IN DISPLAY
+  const pathname = usePathname();
+  
+  useEffect(() => {
+    const currentIndex = items.findIndex((item) => item.href === pathname);
+    if (currentIndex !== -1) {
+      setActiveIndex(currentIndex);
+    }
+
+}, [pathname, items]);
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLUListElement>(null);
   const filterRef = useRef<HTMLSpanElement>(null);
