@@ -45,3 +45,11 @@ This project helped me dive deep into the **Next.js ecosystem** while exploring 
 ```bash
 git clone https://github.com/your-username/NEXT.JS-CRUDES.git
 cd NEXT.JS-CRUDES
+
+### 2️ Install dependencies
+```bash
+git clone https://github.com/your-username/NEXT.JS-CRUDES.git
+cd NEXT.JS-CRUDES
+
+### 3️⃣ Run the development server
+npm run dev
