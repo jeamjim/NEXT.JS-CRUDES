@@ -3,29 +3,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { User } from "lucide-react";
 
-
-// interface User {
-//   id: number;
-//   name: string;
-//   email: string;
-//   role: string;
-// }
-
-// const data: User[] = [
-//   { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
-//   { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" },
-//   { id: 3, name: "Mike Johnson", email: "mike@example.com", role: "Editor" },
-//   { id: 4, name: "Alice Brown", email: "alice@example.com", role: "Admin" },
-//   { id: 5, name: "Robert White", email: "robert@example.com", role: "User" },
-// ];
-
-
-
-
-
-
-
-
 const MyTablePage: React.FC = () => {
 
   type Niggas = {
@@ -35,8 +12,6 @@ const MyTablePage: React.FC = () => {
   address: string;
   created_at: string;
 };
-
-
 
 
 const [niggas, setNiggas] = useState<Niggas[]>([]);
@@ -100,7 +75,7 @@ const sortedAndFilteredData = useMemo(() => {
 
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Nigga's Data Table</h1>
 
       {/* Search Bar */}

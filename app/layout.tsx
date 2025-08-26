@@ -38,7 +38,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center`}
       >
         {/* Centered fixed nav */}
-        <div className="top-0 w-full flex justify-center mt-5">
+        <div className="top-0 w-11/12 flex justify-center mt-15">
           <GooeyNav items={items} />
         </div>
 

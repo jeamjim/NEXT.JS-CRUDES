@@ -6,6 +6,7 @@ export interface BentoCardProps {
   title?: string;
   description?: string;
   label?: string;
+  image?: string;
   textAutoHide?: boolean;
   disableAnimations?: boolean;
 }
@@ -30,40 +31,46 @@ const MOBILE_BREAKPOINT = 768;
 
 const cardData: BentoCardProps[] = [
   {
+    image: "https://scontent.fcgm1-1.fna.fbcdn.net/v/t39.30808-1/463846240_1089293152774615_1645455704801163993_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=111&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeHSKwYQFz4i8UOex2X__TGXYjJ-k_rCqExiMn6T-sKoTFf5qcKYDpuqO5LhazOF5Am5Y-WOCiSvpr0xQgDpJdUn&_nc_ohc=rqji4gsIEV4Q7kNvwH0qB1E&_nc_oc=AdkGuGETwyPUSnsEDPCYyptu68x4GnG7DS69GxPi5_6-Yah4XIgqSErJmJ9BVpVXK3A&_nc_zt=24&_nc_ht=scontent.fcgm1-1.fna&_nc_gid=htIi8D6Kc1eiWhQPwfA7DA&oh=00_AfW6Ayfz7pH-YFrIcK0Mr8suki3uh0WrIsGoWnAYt6718g&oe=68B39BD2",
     color: "#0F172A40",
-    title: "Analytics",
-    description: "Track user behavior",
-    label: "Insights",
+    title: "Lister",
+    description: "Dele ko magkuha matigda kay ma remember nako ang past",
+    label: "Nigga #1",
   },
   {
+    image: "https://scontent.fcgm1-1.fna.fbcdn.net/v/t39.30808-1/536623129_2330102127393087_8440645198970521997_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=102&ccb=1-7&_nc_sid=1d2534&_nc_eui2=AeEvNQ8w5WYe2vUvm1H0OfMUbUmxgffe2XxtSbGB997ZfDOwbV_w_N8q6w8Z9H9caeoqXQHFBOkT8ikIlpBfgrDf&_nc_ohc=xFEkV8H5T-cQ7kNvwFME1nX&_nc_oc=AdkMTLcxBXKR9zjiCSiUCf__hRXWkC0gsKeWvlpNHGrFEYYB-exfdTWCyCd6vbFhjz8&_nc_zt=24&_nc_ht=scontent.fcgm1-1.fna&_nc_gid=ZxBBvM3pYOfUDfpHfNVqGg&oh=00_AfU8dSOQrqgvB-ND2bGKCIPlk_DIEXcMWw_ahvpjqOq8eA&oe=68B3878F",
     color: "#0F172A40",
-    title: "Dashboard",
-    description: "Centralized data view",
-    label: "Overview",
+    title: "Arvin",
+    description: "lowkey homophobic",
+    label: "nigga #2",
   },
   {
+    image: "https://scontent.fcgm1-1.fna.fbcdn.net/v/t39.30808-6/480860296_1175370494166880_3678821065429728702_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEpZmplf4RbUT6hUBQIlFrloWhQwAFsIeyhaFDAAWwh7JAH4Hst3BY8rnDgL9nqgHo7gTTMa7vJosn0196a4qsV&_nc_ohc=NmavUtRhjEgQ7kNvwGsKds1&_nc_oc=AdmFBFzBEihBuI2bNtWgsxZuvShRYtlCmcUeK26edaYPhrffda_S1oriI1S6N2xm12w&_nc_zt=23&_nc_ht=scontent.fcgm1-1.fna&_nc_gid=mwBt25cYsGItKCbRIl3TAw&oh=00_AfW_idWKDHSnG_krfIePj-rW84O2HlDudWIfKA-zCrDo7w&oe=68B3A744",
     color: "#0F172A40",
-    title: "Collaboration",
-    description: "Work together seamlessly",
-    label: "Teamwork",
+    title: "Lister",
+    description: "Daghan kog obligasyon sa minecraft",
+    label: "Minecraft manyak",
   },
   {
+    image: "https://scontent.fcgm1-1.fna.fbcdn.net/v/t39.30808-6/481448440_2305588679841213_8339816643446045084_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeGptw1oaZgEx8LlWRmGbOQIkFATxc5R-8CQUBPFzlH7wOzdeYlBsYZ3J3GTotdvR67Oyec1nVrHWuqwbDwDEKoE&_nc_ohc=HgBXiByVI_0Q7kNvwE6BleU&_nc_oc=AdlwQCcVv42GCuEvS9TCyRFcxc3c1jxp-iQSiVy2xtnt2pFVfR8165ppGaIGtmF9wKQ&_nc_zt=23&_nc_ht=scontent.fcgm1-1.fna&_nc_gid=eGXWlhpmrAHNT3xmB7ttqg&oh=00_AfWV5EGZ7TUvUBXJ3sSr9n0JXylFjU-YGXxFlr87DMI-BA&oe=68B3BE74",
     color: "#0F172A40",
-    title: "Automation",
-    description: "Streamline workflows",
-    label: "Efficiency",
+    title: "Unmatched handsomenss",
+    description: "Lowkey artista",
+    label: "Nigga #3",
   },
   {
+    image: "https://scontent.fcgm1-1.fna.fbcdn.net/v/t39.30808-6/532593082_1510400856981736_8917852540307656920_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHS8ndhYKDWYaEzszfjUV8eOh5kmZR8VNc6HmSZlHxU1zJ-_PXe0LZPDg4P9RweYYuYW7vY9ncwtl1dYnK0I4kX&_nc_ohc=1uoJzR2cqF4Q7kNvwET5VMt&_nc_oc=AdkxgY9WV6lXTWyvxaFHJN3FD50imffTcsbAAHQhuj0OAuKVsxo10o2fQWLE41K1cY0&_nc_zt=23&_nc_ht=scontent.fcgm1-1.fna&_nc_gid=5yc3yIE2dtSw-41me9vqhw&oh=00_AfXjfSv7w1EQ7sCDTGhHV_nd60xUBQZhdcDASj1Uv2txPQ&oe=68B3B770",
+    color: "#0F172A40",
+    title: "",
+    description: "Connect favorite tools",
+    label: "Nigga #4",
+  },
+  {
+    image: "https://scontent.fcgm1-1.fna.fbcdn.net/v/t39.30808-6/449599145_2478702845666693_8770549882852648255_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGWSVaGuANnvVvU1Ct76tfONQ5sXkbWtlI1DmxeRta2Uiq2Tf_KXyruu5D9tbe6jmH-oKGJxMTkjTyvpBRH42nQ&_nc_ohc=VmDaQKDvPjsQ7kNvwE3sfaw&_nc_oc=AdmqTcsU2deGAv5NoMSeamCxTNAgswJ-M-hyxguKtxN0UoD4K1rJZiITF68dZyAEb5A&_nc_zt=23&_nc_ht=scontent.fcgm1-1.fna&_nc_gid=Oy1w8wLawtvDJRrjgtVOjg&oh=00_AfVzwlmvAlQ5rkpHIXiQwjovFMm8KGlGj9FlWa9w1NvfsA&oe=68B3A2EB",
     color: "#0F172A40",
     title: "Integration",
     description: "Connect favorite tools",
-    label: "Connectivity",
-  },
-  {
-    color: "#0F172A40",
-    title: "Security",
-    description: "Enterprise-grade protection",
-    label: "Protection",
+    label: "Nigga #5",
   },
 ];
 
@@ -577,6 +584,19 @@ const MagicBento: React.FC<BentoProps> = ({
             margin: 0 auto;
             padding: 0.5rem;
           }
+
+          .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4); /* dark overlay */
+            z-index: 0;
+          }
+
+          .card * {
+            position: relative;
+            z-index: 1; /* text above overlay */
+          }
           
           @media (min-width: 600px) {
             .card-responsive {
@@ -693,8 +713,13 @@ const MagicBento: React.FC<BentoProps> = ({
 
             const cardStyle = {
               backgroundColor: card.color || "var(--background-dark)",
+              backgroundImage: card.image ? `url(${card.image})` : undefined,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
               borderColor: "var(--border-color)",
               color: "var(--white)",
+              position: "relative",
               "--glow-x": "50%",
               "--glow-y": "50%",
               "--glow-intensity": "0",
