@@ -43,7 +43,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
         </div>
 
         {/* Add top padding to push content below the nav */}
-        <main className="w-full pt-20" >
+        <main className="w-full pt-15" >  
           {children}
         </main>
       </body>
