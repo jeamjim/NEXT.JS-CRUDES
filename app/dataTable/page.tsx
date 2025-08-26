@@ -1,54 +1,92 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { User } from "lucide-react";
 
-interface User {
+
+// interface User {
+//   id: number;
+//   name: string;
+//   email: string;
+//   role: string;
+// }
+
+// const data: User[] = [
+//   { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
+//   { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" },
+//   { id: 3, name: "Mike Johnson", email: "mike@example.com", role: "Editor" },
+//   { id: 4, name: "Alice Brown", email: "alice@example.com", role: "Admin" },
+//   { id: 5, name: "Robert White", email: "robert@example.com", role: "User" },
+// ];
+
+
+
+
+
+
+
+
+const MyTablePage: React.FC = () => {
+
+  type Niggas = {
   id: number;
   name: string;
   email: string;
-  role: string;
-}
+  address: string;
+  created_at: string;
+};
 
-const data: User[] = [
-  { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
-  { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" },
-  { id: 3, name: "Mike Johnson", email: "mike@example.com", role: "Editor" },
-  { id: 4, name: "Alice Brown", email: "alice@example.com", role: "Admin" },
-  { id: 5, name: "Robert White", email: "robert@example.com", role: "User" },
-];
 
-const MyTablePage: React.FC = () => {
+
+
+const [niggas, setNiggas] = useState<Niggas[]>([]);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await fetch("/api/niggas");
+        const data = await res.json();
+        setNiggas(data);
+      } catch (err) {
+        console.error("Error fetching users:", err);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+
+
+
   const [search, setSearch] = useState("");
-  const [sortKey, setSortKey] = useState<keyof User>("name");
+  const [sortKey, setSortKey] = useState<keyof Niggas>("name");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
-  const handleEdit = (user: User) => {
+  const handleEdit = (user: Niggas) => {
     console.log("Edit:", user);
   };
 
-  const handleDelete = (user: User) => {
+  const handleDelete = (user: Niggas) => {
     console.log("Delete:", user);
   };
 
-  const sortedAndFilteredData = useMemo(() => {
-    return data
-      .filter(
-        (item) =>
-          item.name.toLowerCase().includes(search.toLowerCase()) ||
-          item.email.toLowerCase().includes(search.toLowerCase()) ||
-          item.role.toLowerCase().includes(search.toLowerCase())
-      )
-      .sort((a, b) => {
-        const valA = a[sortKey].toString().toLowerCase();
-        const valB = b[sortKey].toString().toLowerCase();
-        return sortOrder === "asc"
-          ? valA.localeCompare(valB)
-          : valB.localeCompare(valA);
-      });
-  }, [search, sortKey, sortOrder]);
+const sortedAndFilteredData = useMemo(() => {
+  return niggas
+    .filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase()) ||
+      item.email.toLowerCase().includes(search.toLowerCase()) ||
+      item.address.toLowerCase().includes(search.toLowerCase())
+    )
+    .sort((a, b) => {
+      const valA = a[sortKey as keyof Niggas]?.toString().toLowerCase() ?? "";
+      const valB = b[sortKey as keyof Niggas]?.toString().toLowerCase() ?? "";
 
-  const toggleSort = (key: keyof User) => {
+      return sortOrder === "asc"
+        ? valA.localeCompare(valB)
+        : valB.localeCompare(valA);
+    });
+}, [niggas, search, sortKey, sortOrder]);
+
+  const toggleSort = (key: keyof Niggas) => {
     if (sortKey === key) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
@@ -57,9 +95,13 @@ const MyTablePage: React.FC = () => {
     }
   };
 
+
+ 
+
+
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">User Data Table</h1>
+      <h1 className="text-2xl font-bold mb-4">Nigga's Data Table</h1>
 
       {/* Search Bar */}
       <input
@@ -92,40 +134,42 @@ const MyTablePage: React.FC = () => {
               >
                 Email {sortKey === "email" && (sortOrder === "asc" ? "▲" : "▼")}
               </th>
+              
               <th
                 className="px-4 py-2 cursor-pointer"
-                onClick={() => toggleSort("role")}
+                onClick={() => toggleSort("email")}
               >
-                Role {sortKey === "role" && (sortOrder === "asc" ? "▲" : "▼")}
+                Address {sortKey === "address" && (sortOrder === "asc" ? "▲" : "▼")}
               </th>
+
               <th className="px-4 py-2 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {sortedAndFilteredData.length > 0 ? (
-              sortedAndFilteredData.map((user) => (
+              sortedAndFilteredData.map((niggass) => (
                 <tr
-                  key={user.id}
+                  key={niggass.id}
                   className="border-t transition-colors"
                 >
-                  <td className="px-4 py-2">{user.name}</td>
-                  <td className="px-4 py-2">{user.email}</td>
-                  <td className="px-4 py-2">{user.role}</td>
+                  <td className="px-4 py-2">{niggass.name}</td>
+                  <td className="px-4 py-2">{niggass.email}</td>
+                  <td className="px-4 py-2">{niggass.address}</td>
                   <td className="px-4 py-2 text-center space-x-2">
                     <button
-                      onClick={() => handleEdit(user)}
+                      onClick={() => handleEdit(niggass)}
                       className="px-3 py-1  text-white rounded hover:bg-blue-600 transition"
                     >
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(user)}
+                      onClick={() => handleDelete(niggass)}
                       className="px-3 py-1 text-white rounded hover:bg-red-600 transition"
                     >
                       Archive
                     </button>
                     <button
-                      onClick={() => handleDelete(user)}
+                      onClick={() => handleDelete(niggass)}
                       className="px-3 py-1 text-white rounded hover:bg-green-600 transition"
                     >
                       View
