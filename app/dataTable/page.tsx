@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { User, X } from "lucide-react";
 import { useNiggas } from "@/hooks/useNiggas";
 import { Nigga } from "@/types/niggas";
+import NiggaModal from "@/components/NiggaModal";
 
 const MyTablePage: React.FC = () => {
   const { niggas, addNigga } = useNiggas();
@@ -14,13 +15,6 @@ const MyTablePage: React.FC = () => {
     email: "",
     address: "",
   });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await addNigga(formData);
-    setFormData({ name: "", email: "", address: "" });
-    setShowModal(false);
-  };
 
   // Sorting & filtering (same as before)
   const [search, setSearch] = useState("");
@@ -149,59 +143,14 @@ const MyTablePage: React.FC = () => {
       </div>
 
       
-      {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-black rounded-lg p-6 w-96 shadow-lg">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Create New User</h2>
-              <button onClick={() => setShowModal(false)}>
-                <X className="w-5 h-5 text-gray-500" />
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <input
-                type="text"
-                placeholder="Name"
-                className="w-full p-2 border rounded"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                required
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full p-2 border rounded"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                required
-              />
-              <input
-                type="text"
-                placeholder="Address"
-                className="w-full p-2 border rounded"
-                value={formData.address}
-                onChange={(e) =>
-                  setFormData({ ...formData, address: e.target.value })
-                }
-                required
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
+      <NiggaModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onSubmit={async (formData) => {
+          await addNigga(formData);
+          setShowModal(false);
+        }}
+      />
     </div>
   );
 };
