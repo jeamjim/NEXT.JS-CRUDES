@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { User, X } from "lucide-react";
+import { useNiggas } from "@/hooks/useNiggas";
+import { Nigga } from "@/types/niggas";
 
 const MyTablePage: React.FC = () => {
+  const { niggas, addNigga } = useNiggas();
 
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -12,105 +15,37 @@ const MyTablePage: React.FC = () => {
     address: "",
   });
 
-  
-
-  //add niggas handle submit button 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    try {
-      const res = await fetch("/api/niggas", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!res.ok) throw new Error("Failed to create user");
-
-      const newUser = await res.json();
-
-      setNiggas((prev) => [...prev, newUser]); // update table instantly
-      setFormData({ name: "", email: "", address: "" }); // reset
-      setShowModal(false); // close modal
-    } catch (err) {
-      console.error("Error creating user:", err);
-    }
+    await addNigga(formData);
+    setFormData({ name: "", email: "", address: "" });
+    setShowModal(false);
   };
 
-
-
-
-
-
-
-  //fetching niggas table content
-  type Niggas = {
-  id: number;
-  name: string;
-  email: string;
-  address: string;
-  created_at: string;
-};
-
-const [niggas, setNiggas] = useState<Niggas[]>([]);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await fetch("/api/niggas");
-        const data = await res.json();
-        setNiggas(data);
-      } catch (err) {
-        console.error("Error fetching users:", err);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-
-
-
-
-  //dataTable table
+  // Sorting & filtering (same as before)
   const [search, setSearch] = useState("");
-  const [sortKey, setSortKey] = useState<keyof Niggas>("name");
+  const [sortKey, setSortKey] = useState<keyof Nigga>("name");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
-  const handleEdit = (user: Niggas) => {
-    console.log("Edit:", user);
-  };
+  const sortedAndFilteredData = useMemo(() => {
+    return niggas
+      .filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()) ||
+        item.email.toLowerCase().includes(search.toLowerCase()) ||
+        item.address.toLowerCase().includes(search.toLowerCase())
+      )
+      .sort((a, b) => {
+        const valA = a[sortKey]?.toString().toLowerCase() ?? "";
+        const valB = b[sortKey]?.toString().toLowerCase() ?? "";
+        return sortOrder === "asc"
+          ? valA.localeCompare(valB)
+          : valB.localeCompare(valA);
+      });
+  }, [niggas, search, sortKey, sortOrder]);
 
-  const handleArchive = (user: Niggas) => {
-    console.log("Archive:", user);
-  };
-
-  const handleView = (user: Niggas) => {
-    console.log("View:", user);
-  };
-
-
-const sortedAndFilteredData = useMemo(() => {
-  return niggas
-    .filter((item) =>
-      item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.email.toLowerCase().includes(search.toLowerCase()) ||
-      item.address.toLowerCase().includes(search.toLowerCase())
-    )
-    .sort((a, b) => {
-      const valA = a[sortKey as keyof Niggas]?.toString().toLowerCase() ?? "";
-      const valB = b[sortKey as keyof Niggas]?.toString().toLowerCase() ?? "";
-
-      return sortOrder === "asc"
-        ? valA.localeCompare(valB)
-        : valB.localeCompare(valA);
-    });
-}, [niggas, search, sortKey, sortOrder]);
-
-  const toggleSort = (key: keyof Niggas) => {
-    if (sortKey === key) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    } else {
+  const toggleSort = (key: keyof Nigga) => {
+    if (sortKey === key) setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    else {
       setSortKey(key);
       setSortOrder("asc");
     }
@@ -118,8 +53,6 @@ const sortedAndFilteredData = useMemo(() => {
 
 
  
-
-
   return (
     <div className="max-w-6xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Nigga's Data Table</h1>
@@ -181,19 +114,19 @@ const sortedAndFilteredData = useMemo(() => {
                   <td className="px-4 py-2">{niggass.address}</td>
                   <td className="px-4 py-2 text-center space-x-2">
                     <button
-                      onClick={() => handleEdit(niggass)}
+                      // onClick={() => handleEdit(niggass)}
                       className="px-3 py-1  text-white rounded hover:bg-blue-600 transition"
                     >
                       Edit
                     </button>
                     <button
-                      onClick={() => handleArchive(niggass)}
+                      // onClick={() => handleArchive(niggass)}
                       className="px-3 py-1 text-white rounded hover:bg-red-600 transition"
                     >
                       Archive
                     </button>
                     <button
-                      onClick={() => handleView(niggass)}
+                      // onClick={() => handleView(niggass)}
                       className="px-3 py-1 text-white rounded hover:bg-green-600 transition"
                     >
                       View
