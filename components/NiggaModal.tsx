@@ -58,7 +58,7 @@ const NiggaModal: React.FC<NiggaModalProps> = ({ isOpen, onClose, onSubmit }) =>
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              className="px-4 py-2 bg-red-500 rounded hover:bg-red-700"
             >
               Cancel
             </button>

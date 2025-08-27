@@ -5,6 +5,47 @@ import { User, X } from "lucide-react";
 import { useNiggas } from "@/hooks/useNiggas";
 import { Nigga } from "@/types/niggas";
 import NiggaModal from "@/components/NiggaModal";
+import Swal from "sweetalert2";
+
+
+const createUser = async (newUser: { name: string; email: string; address: string }) => {
+  try {
+    const res = await fetch("/api/niggas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newUser),
+    });
+
+    if (res.status === 409) {
+      const data = await res.json();
+      Swal.fire({
+        icon: "warning",
+        title: "Duplicate User",
+        text: data.error,
+      });
+      return;
+    }
+
+    if (!res.ok) {
+      throw new Error("Failed to create user");
+    }
+
+    const data = await res.json();
+    Swal.fire({
+      icon: "success",
+      title: "User Created",
+      text: `${data.name} has been added successfully.`,
+    });
+  } catch (err: any) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: err.message,
+    });
+  }
+};
+
+
 
 const MyTablePage: React.FC = () => {
   const { niggas, addNigga } = useNiggas();
@@ -44,6 +85,9 @@ const MyTablePage: React.FC = () => {
       setSortOrder("asc");
     }
   };
+
+
+ 
 
 
  
@@ -147,8 +191,8 @@ const MyTablePage: React.FC = () => {
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onSubmit={async (formData) => {
-          await addNigga(formData);
-          setShowModal(false);
+          await createUser(formData); // ✅ calls SweetAlert logic
+          setShowModal(true);        // ✅ closes modal after submit
         }}
       />
     </div>
