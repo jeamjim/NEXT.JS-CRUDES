@@ -9,6 +9,7 @@ export async function GET(): Promise<Response> {
       "SELECT * FROM niggas ORDER BY created_at DESC"
     );
 
+    console.log("API returning rows:", rows.length);
     return new Response(JSON.stringify(rows), { status: 200 });
   } catch (err: any) {
     return new Response(JSON.stringify({ error: err.message }), {
@@ -16,6 +17,10 @@ export async function GET(): Promise<Response> {
     });
   }
 }
+
+
+
+
 
 // POST create new user
 export async function POST(req: Request): Promise<Response> {
