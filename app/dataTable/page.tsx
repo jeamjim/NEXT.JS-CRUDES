@@ -1,10 +1,49 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
-import { User } from "lucide-react";
+import { User, X } from "lucide-react";
 
 const MyTablePage: React.FC = () => {
 
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    address: "",
+  });
+
+  
+
+  //add niggas handle submit button 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("/api/niggas", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed to create user");
+
+      const newUser = await res.json();
+
+      setNiggas((prev) => [...prev, newUser]); // update table instantly
+      setFormData({ name: "", email: "", address: "" }); // reset
+      setShowModal(false); // close modal
+    } catch (err) {
+      console.error("Error creating user:", err);
+    }
+  };
+
+
+
+
+
+
+
+  //fetching niggas table content
   type Niggas = {
   id: number;
   name: string;
@@ -13,8 +52,8 @@ const MyTablePage: React.FC = () => {
   created_at: string;
 };
 
-
 const [niggas, setNiggas] = useState<Niggas[]>([]);
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -32,6 +71,8 @@ const [niggas, setNiggas] = useState<Niggas[]>([]);
 
 
 
+
+  //dataTable table
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState<keyof Niggas>("name");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -40,9 +81,14 @@ const [niggas, setNiggas] = useState<Niggas[]>([]);
     console.log("Edit:", user);
   };
 
-  const handleDelete = (user: Niggas) => {
-    console.log("Delete:", user);
+  const handleArchive = (user: Niggas) => {
+    console.log("Archive:", user);
   };
+
+  const handleView = (user: Niggas) => {
+    console.log("View:", user);
+  };
+
 
 const sortedAndFilteredData = useMemo(() => {
   return niggas
@@ -87,10 +133,13 @@ const sortedAndFilteredData = useMemo(() => {
         className="mb-4 w-full p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
 
-    <button className="flex items-center gap-2 px-3 py-1 border border-gray-200 text-white rounded hover:bg-green-600 transition mb-4">
-      <User className="w-4 h-4" />
-      <span>Create New</span>
-    </button>
+      <button
+          onClick={() => setShowModal(true)}
+          className="flex items-center gap-2 px-3 py-1 border border-gray-200 text-white rounded hover:bg-green-600 transition mb-4 bg-green-500"
+        >
+          <User className="w-4 h-4" />
+          <span>Create New</span>
+      </button>
 
       {/* Table */}
       <div className="overflow-x-auto rounded-lg shadow">
@@ -138,13 +187,13 @@ const sortedAndFilteredData = useMemo(() => {
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(niggass)}
+                      onClick={() => handleArchive(niggass)}
                       className="px-3 py-1 text-white rounded hover:bg-red-600 transition"
                     >
                       Archive
                     </button>
                     <button
-                      onClick={() => handleDelete(niggass)}
+                      onClick={() => handleView(niggass)}
                       className="px-3 py-1 text-white rounded hover:bg-green-600 transition"
                     >
                       View
@@ -165,6 +214,61 @@ const sortedAndFilteredData = useMemo(() => {
           </tbody>
         </table>
       </div>
+
+      
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-black rounded-lg p-6 w-96 shadow-lg">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Create New User</h2>
+              <button onClick={() => setShowModal(false)}>
+                <X className="w-5 h-5 text-gray-500" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <input
+                type="text"
+                placeholder="Name"
+                className="w-full p-2 border rounded"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full p-2 border rounded"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+                required
+              />
+              <input
+                type="text"
+                placeholder="Address"
+                className="w-full p-2 border rounded"
+                value={formData.address}
+                onChange={(e) =>
+                  setFormData({ ...formData, address: e.target.value })
+                }
+                required
+              />
+
+              <button
+                type="submit"
+                className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
