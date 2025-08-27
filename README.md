@@ -1,55 +1,45 @@
-# NEXT.JS-CRUDES 🚀
+# 💤 Drowsiness Detection Capstone 🚗💡
 
-![Next.js](https://img.shields.io/badge/Next.js-13-black?style=for-the-badge&logo=next.js)
+![React Native](https://img.shields.io/badge/React_Native-Expo-blue?style=for-the-badge&logo=react)
+![Node.js](https://img.shields.io/badge/Node.js-18-green?style=for-the-badge&logo=node.js)
 ![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-blueviolet?style=for-the-badge&logo=tailwindcss)
-![Status](https://img.shields.io/badge/Status-Learning-green?style=for-the-badge)
+![Firebase](https://img.shields.io/badge/Firebase-Database-orange?style=for-the-badge&logo=firebase)
+![Status](https://img.shields.io/badge/Status-Ongoing-yellow?style=for-the-badge)
 
 ---
 
-## 📖 About the Project
+## 📖 About the Project  
 
-**NEXT.JS-CRUDES** is my **first Next.js application**, built to understand the basics of:
-- File-based routing  
-- API routes  
-- Server and client components  
-- State management  
-- CRUD operations (Create, Read, Update, Delete)  
-
-This project helped me dive deep into the **Next.js ecosystem** while exploring TailwindCSS for UI styling.
+**Drowsiness Detection Capstone** is a system designed to improve **road safety** by detecting driver fatigue in real-time.  
+It consists of:  
+- 📱 **Mobile App** (React Native + Expo) – Provides live alerts and drowsiness detection.  
+- 🌐 **Web Dashboard** (Node.js + React) – Allows monitoring of driver activity, logs, and alerts.  
+- 🔥 **Firebase Database** – Centralized storage for user accounts, logs, and real-time detection results.  
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack  
 
-- **Next.js** (App Router)
-- **React 18**
-- **TailwindCSS** for styling
-- **JavaScript** for logic
-- **Vercel** for deployment
-
----
-
-## ⚡ Features
-
-- 🔍 **Read** – Fetch and display data from a mock API.  
-- ➕ **Create** – Add new entries dynamically.  
-- ✏️ **Update** – Edit existing records.  
-- ❌ **Delete** – Remove items with confirmation prompts.  
+- **Mobile Application**: React Native (Expo)  
+- **Web Application**: Node.js + React  
+- **Database**: Firebase (Firestore + Authentication)  
+- **Other Tools**: TensorFlow Lite / ML Model (for eye-blink & yawn detection), REST APIs  
 
 ---
 
-## 🚀 Getting Started
+## ⚡ Features  
 
-### 1️⃣ Clone the repository
+- 👀 **Drowsiness Detection** – Real-time detection of closed eyes, yawning, and head movements.  
+- 🔔 **Instant Alerts** – Mobile app sends alerts (sound/vibration) when drowsiness is detected.  
+- 📊 **Web Dashboard** – Admin can monitor driver status, alerts history, and statistics.  
+- ☁️ **Cloud Sync** – All logs stored in Firebase for real-time access across devices.  
+- 🔐 **Authentication** – Secure login and account management using Firebase Auth.  
+
+---
+
+## 🚀 Getting Started  
+
+### 1️⃣ Clone the Repository  
 ```bash
-git clone https://github.com/your-username/NEXT.JS-CRUDES.git
-cd NEXT.JS-CRUDES
-
-### 2️ Install dependencies
-```bash
-git clone https://github.com/your-username/NEXT.JS-CRUDES.git
-cd NEXT.JS-CRUDES
-
-### 3️⃣ Run the development server
-npm run dev
+git clone https://github.com/your-username/Drowsiness-Detection-Capstone.git
+cd Drowsiness-Detection-Capstone
